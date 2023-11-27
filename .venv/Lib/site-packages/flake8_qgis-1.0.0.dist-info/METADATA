@@ -1,0 +1,155 @@
+Metadata-Version: 2.1
+Name: flake8-qgis
+Version: 1.0.0
+Summary: Flake8 plugin for QGIS python plugins.
+Home-page: https://github.com/GispoCoding/flake8-qgis
+Author: Joona Laine
+Author-email: joona@gispo.fi
+Maintainer: Joona Laine
+Maintainer-email: joona@gispo.fi
+License: MIT license
+Keywords: flake8,qgis,QGIS,PyQGIS
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development
+Classifier: Framework :: Flake8
+Requires-Python: >=3.6.1
+Description-Content-Type: text/markdown
+Requires-Dist: flake8 (>=3.7)
+Requires-Dist: astor (>=0.1)
+Requires-Dist: importlib-metadata (>=0.9) ; python_version < "3.8"
+
+# flake8-qgis
+[![PyPI version](https://badge.fury.io/py/flake8-qgis.svg)](https://badge.fury.io/py/flake8-qgis)
+[![Downloads](https://img.shields.io/pypi/dm/flake8-qgis.svg)](https://pypistats.org/packages/flake8-qgis)
+![CI](https://github.com/GispoCoding/flake8-qgis/workflows/CI/badge.svg)
+[![Code on Github](https://img.shields.io/badge/Code-GitHub-brightgreen)](https://github.com/GispoCoding/flake8-qgis)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
+
+A [flake8](https://flake8.pycqa.org/en/latest/index.html) plugin for QGIS3 python plugins written in Python.
+
+
+Made with Cookiecutter template [cookiecutter-flake8-plugin](https://github.com/MartinThoma/cookiecutter-flake8-plugin).
+Inspired by [flake8-simplify](https://github.com/MartinThoma/flake8-simplify).
+
+## Installation
+
+Install with `pip`:
+
+```bash
+pip install flake8-qgis
+```
+
+## Usage
+
+Just call `flake8 .` in your package or `flake your.py`.
+
+
+## Rules
+
+* `QGS101`: Don't use from-imports from qgis protected members ([example](#QGS101))
+* `QGS102`: Don't use imports from qgis protected members ([example](#QGS102))
+* `QGS103`: Don't use from-imports from PyQt directly ([example](#QGS103))
+* `QGS104`: Don't use imports from PyQt directly ([example](#QGS104))
+* `QGS105`: Don't pass QgisInterface as an argument ([example](#QGS105))
+* `QGS106`: Don't import gdal directly, import if from osgeo package ([example](#QGS106))
+
+
+
+You might have good reasons to ignore some rules.
+To do that, use the standard Flake8 configuration. For example, within the `setup.cfg` file:
+
+```python
+[flake8]
+ignore = QGS101, QGS102
+```
+
+
+## Examples
+
+### QGS101
+
+```python
+# Bad
+from qgs._core import QgsMapLayer, QgsVectorLayer
+from qgis._core import QgsApplication
+
+# Good
+from qgs.core import QgsMapLayer, QgsVectorLayer
+from qgis.core import QgsApplication
+```
+
+### QGS102
+
+```python
+# Bad
+import qgs._core.QgsVectorLayer as QgsVectorLayer
+
+# Good
+import qgs.core.QgsVectorLayer as QgsVectorLayer
+```
+
+### QGS103
+
+```python
+# Bad
+from PyQt5.QtCore import pyqtSignal
+
+# Good
+from qgis.PyQt.QtCore import pyqtSignal
+```
+
+### QGS104
+
+```python
+# Bad
+import PyQt5.QtCore.pyqtSignal as pyqtSignal
+
+# Good
+import qgis.PyQt.QtCore.pyqtSignal as pyqtSignal
+```
+
+### QGS105
+
+```python
+# Bad: iface passed as argument
+def some_function(somearg, iface):
+    # do something with iface
+
+
+# Good: iface imported
+from qgis.utils import iface
+
+def some_function(somearg):
+    # do something with iface
+```
+
+```python
+# in classFactory the passing is OK, since QGIS injects it
+def classFactory(iface):
+    # preferably do not pass the iface to plugin
+```
+
+### QGS106
+
+```python
+# Bad
+import gdal
+import ogr
+
+# Good
+from osgeo import gdal
+```
+
+

@@ -1,0 +1,41 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.
+# Mandatory items:
+
+[general]
+name=CellEditor
+qgisMinimumVersion=3.0
+qgisMaximumVersion=
+description=Integrated Multicelledit and Cellvalueedit.
+version=0.1.3
+author=KICT, Hermesys
+email=info@hermesys.co.kr
+
+about=This plugin based on serval (https://github.com/erpas/serval) plugin.
+
+tracker=
+repository=
+# End of mandatory metadata
+
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
+changelog=
+
+# Tags are comma separated with spaces allowed
+tags=raster, grid, pixel, value, cell, draw, nodata
+
+homepage=
+category=Raster
+icon=icons/Multi cell value.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+

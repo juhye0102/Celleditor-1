@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: pb-tool
+Version: 3.1.0
+Summary: Plugin build tool for QGIS: A tool to aid in QGIS Python plugin development
+Home-page: http://g-sherman.github.io/plugin_build_tool
+Author: Gary Sherman
+Author-email: gsherman@geoapt.com
+Maintainer: Gary Sherman
+Maintainer-email: gsherman@geoapt.com
+License: GPL2
+Keywords: QGIS PyQGIS
+Platform: Linux
+Platform: Windows
+Platform: OS X
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Topic :: Scientific/Engineering :: GIS
+Requires-Dist: Click
+Requires-Dist: Sphinx
+Requires-Dist: colorama
+
+pb_tool provides commands to deploy and publish a QGIS Python plugin.
+
+
